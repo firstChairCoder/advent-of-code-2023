@@ -1,0 +1,110 @@
+const fs = require("fs");
+const path = require("path");
+
+const data = fs.readFileSync(
+  path.resolve(__dirname, "../inputs/day17.txt"),
+  "utf-8"
+);
+
+let inputs = data.trim().split('\n');
+let graph = {};
+let starting_obj = {};
+let starting_neighbors;
+let best = Infinity;
+let part = 1;
+
+function build_graph(range_min, range_max) {
+	for (let col = 0; col < inputs.length; col++) {
+	  for (let row = 0; row < inputs[0].length; row++) {
+		//set coordinates as being reachable both vertically and horizontally, as 2 separate coordinates
+		graph[col + "," + row + "_v"] = {
+		  least: Infinity,
+		  neighbors: {}
+		};
+		graph[col + "," + row + "_h"] = {
+		  least: Infinity,
+		  neighbors: {}
+		};
+		//check if down neighbors exist 
+		for (let i = range_min; i <= range_max; i++) {
+		  //if they do
+		  if (inputs[col + i]) {
+			//create the key
+			graph[col + "," + row + "_v"].neighbors[(col + i) + "," + row + "_h"] = 0;
+			//sum the length to get to it
+			for (let j = 1; j <= i; j++) {
+			  graph[col + "," + row + "_v"].neighbors[(col + i) + "," + row + "_h"] += +inputs[col + j][row];
+			}
+		  }
+		  //repeat the process to go up
+		  if (inputs[col - i]) {
+			graph[col + "," + row + "_v"].neighbors[(col - i) + "," + row + "_h"] = 0;
+			for (let j = 1; j <= i; j++) {
+			  graph[col + "," + row + "_v"].neighbors[(col - i) + "," + row + "_h"] += +inputs[col - j][row];
+			}
+		  }
+		  //repeat the process to go right
+		  if (inputs[col][row + i]) {
+			graph[col + "," + row + "_h"].neighbors[col + "," + (row + i) + "_v"] = 0;
+			for (let j = 1; j <= i; j++) {
+			  graph[col + "," + row + "_h"].neighbors[col + "," + (row + i) + "_v"] += +inputs[col][row + j];
+			}
+		  }
+		  //repeat the process to go left
+		  if (inputs[col][row - i]) {
+			graph[col + "," + row + "_h"].neighbors[col + "," + (row - i) + "_v"] = 0;
+			for (let j = 1; j <= i; j++) {
+			  graph[col + "," + row + "_h"].neighbors[col + "," + (row - i) + "_v"] += +inputs[col][row - j];
+			}
+		  }
+		}
+	  }
+	}
+  
+	//we shallow-copy-merge 0,0_h.neighbors and 0,0_v.neighbors together, as we want to try everything in a single backtracking.
+	Object.assign(starting_obj, graph["0,0_h"].neighbors, graph["0,0_v"].neighbors);
+	//Begin eval, using every vertical and horizontal neighbors of 0,0
+	starting_neighbors = Object.keys(starting_obj);
+	for (let i = 0; i < starting_neighbors.length; i++) {
+	  walk(starting_neighbors[i], starting_obj[starting_neighbors[i]]);
+	}
+  }
+  
+  //pass the whole neighbor object, and the path length to date
+  function walk(neighbor, cumul) {
+	//if we already made it to this node in a shorter path, no need to proceed
+	//we also stop if we already found a solution (vertically or horizontally) that is shorter than the current attempt
+	if (cumul >= Math.min(graph[neighbor].least, best)) {
+	  return;
+	}
+	//if we made it to the exit (and past the previous if statement), this is the best answer to date.
+	if (neighbor.split("_")[0] == "140,140") {
+	  console.log("Part " + part + " best to date: " + cumul);
+	  // we set it as best for both directions
+	  best = cumul;
+	  //let's keep trying other solutions
+	  return;
+	}
+	//else save as shortest path to node so far
+	graph[neighbor].least = cumul;
+	//we reached a node in the shortest path to date. we will try all possible directions from it.  
+	let n = Object.keys(graph[neighbor].neighbors);
+	for (let i = 0; i < n.length; i++) {
+	  walk(n[i], cumul + graph[neighbor].neighbors[n[i]]);
+	}
+	return;
+  }
+  
+  //build graph
+  build_graph(1, 3);
+  
+  //because we print stuff as we iterate to show progress, we save p1 answer for later
+  let answer_p1 = "part " + part + " answer: " + best;
+  part++;
+  graph = {};
+  starting_obj = {};
+  best = Infinity;
+  //for part 2, we are simply going to change the neighbor ranges
+  build_graph(4, 10);
+  console.log("PART1:", answer_p1);
+  console.log("part " + part + " answer : " + best)

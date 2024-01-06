@@ -1,3 +1,5 @@
+console.time("Execution time");
+
 const fs = require("fs");
 const path = require("path");
 
@@ -70,3 +72,5 @@ function getStepsToNodesZ(moves, network) {
 }
 
 getStepsToNodesZ(moves, network);
+
+console.timeEnd("Execution time");
