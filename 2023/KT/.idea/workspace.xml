@@ -5,8 +5,8 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="13d80daa-bd71-46a6-af2f-a4eb3df8de22" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/../JS/day-01.js" beforeDir="false" afterPath="$PROJECT_DIR$/../JS/day-01.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../inputs/day01.txt" beforeDir="false" afterPath="$PROJECT_DIR$/../inputs/day01.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/day01.txt" beforeDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -60,6 +60,7 @@
     "Gradle.Load Gradle Dependencies.executor": "Run",
     "Kotlin.Day01Kt (1).executor": "Run",
     "Kotlin.Day01Kt.executor": "Run",
+    "Kotlin.Day02Kt.executor": "Run",
     "Kotlin.HelloWorldKt.executor": "Run",
     "RunOnceActivity.OpenProjectViewOnStart": "true",
     "RunOnceActivity.ShowReadmeOnStart": "true",
@@ -71,7 +72,7 @@
     "settings.editor.selected.configurable": "settings.sync"
   }
 }]]></component>
-  <component name="RunManager" selected="Kotlin.Day01Kt (1)">
+  <component name="RunManager" selected="Kotlin.Day02Kt">
     <configuration name="Day01Kt (1)" type="JetRunConfigurationType" temporary="true" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="Day01Kt" />
       <module name="KT.main" />
@@ -86,6 +87,13 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
+    <configuration name="Day02Kt" type="JetRunConfigurationType" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="Day02Kt" />
+      <module name="KT.main" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
     <configuration name="HelloWorldKt" type="JetRunConfigurationType" temporary="true" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="HelloWorldKt" />
       <module name="KT.main" />
@@ -95,6 +103,7 @@
     </configuration>
     <recent_temporary>
       <list>
+        <item itemvalue="Kotlin.Day02Kt" />
         <item itemvalue="Kotlin.Day01Kt (1)" />
         <item itemvalue="Kotlin.HelloWorldKt" />
         <item itemvalue="Kotlin.Day01Kt" />

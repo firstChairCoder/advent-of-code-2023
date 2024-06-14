@@ -38,7 +38,7 @@ class Day01(private val input: List<String>) {
                 //otherwise, see if this is the start of a word and if so
                 //map to the digit that it represents.
                     row.possibleWordsAt(index).firstNotNullOfOrNull { candidate -> words[candidate] }
-           //creates a list of strings separated by `,`
+                //creates a list of strings separated by `,`
             }.joinToString()
         )
     }
