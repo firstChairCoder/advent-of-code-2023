@@ -1,7 +1,7 @@
 const fs = require("fs");
 const path = require("path");
 
-const data = fs.readFileSync(path.resolve(__dirname, "../inputs/day1.txt"), "utf-8")
+const data = fs.readFileSync(path.resolve(__dirname, "../inputs/day01.txt"), "utf-8")
 
 const input = data.trim().split("\n");
 
@@ -20,7 +20,7 @@ console.log("RESULT: ", result);
 
 //PART 2
 let result2 = 0;
-//create an object with keys = digits in words and the values = actual digits
+//create a map with keys = digits in words and the values = actual digits
 const nums = {
   one: 1,
   two: 2,
@@ -53,6 +53,7 @@ for (const line of input) {
   //this arranges the returned `numbers` based on their position in the string.
   //this allows for the manipulation when adding as shown below.
   numbers.sort((a, b) => a.index - b.index);
+  console.log('LIVE NOS: ', numbers)
 
   //for numbers as words, the length would be greater than 1. In such a case, we use the respective value based on the nums object.
   //for regular numbers, the length would be 1, and they're simply cnnverted to integers
